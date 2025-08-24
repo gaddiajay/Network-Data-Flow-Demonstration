@@ -36,14 +36,14 @@ The project is built as a **web-based interface** using **HTML, CSS, and JavaScr
 
 ---
 
-🛠 Technologies Used
+ Technologies Used
 - **HTML5** – Structure of the interactive page  
 - **CSS3** – Cybersecurity-themed UI styling  
 - **JavaScript (Vanilla JS)** – Logic for encryption, transmission, and decryption  
 
 ---
 
-🚀 How to Run the Project
+How to Run the Project
 1. Clone this repository:
    ```bash
    git clone https://github.com/gaddiajay/Network-Data-Flow-Demonstration.git
@@ -60,7 +60,7 @@ The project is built as a **web-based interface** using **HTML, CSS, and JavaScr
 
 ---
 
- 📊 Expected Output
+  Expected Output
 
 * Entering data → Encrypts it into encoded text.
 * Transmitting → Shows animated flow with encrypted data displayed.
@@ -70,7 +70,7 @@ This helps learners understand the **journey of data** from plaintext → encryp
 
 ---
 
- 🔒 Future Enhancements
+  Future Enhancements
 
 * Upgrade encryption from Base64 to **AES or RSA** using libraries like [CryptoJS](https://github.com/brix/crypto-js).
 * Add an **attacker simulation view** to show risks of unencrypted transmission.
@@ -81,7 +81,7 @@ This helps learners understand the **journey of data** from plaintext → encryp
 
 ## 👨‍💻 Author
 
-**Ajay Gaddi**
+Ajay Gaddi
 
 
 ---
@@ -92,7 +92,4 @@ This helps learners understand the **journey of data** from plaintext → encryp
 
 ---
 
-⚡ This README emphasizes both the **interactive learning aspect** and your **cybersecurity knowledge** — making it look professional and recruiter-friendly.  
-
-Would you like me to also **write a short GitHub Pages deployment guide** so you can share this project as a live demo link in your resume?
 ```
