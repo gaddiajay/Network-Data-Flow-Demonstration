@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Cybersecurity Webpage</title>
+    <style>
+        /* General page styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a2e; /* Dark theme background */
+            color: #ffffff; /* Text color */
+            text-align: center;
+        }
+
+        h1 {
+            margin: 20px;
+            font-size: 2.5em;
+            color: #f5b041; /* Gold color to match the cybersecurity theme */
+        }
+
+        .quote {
+            margin: 20px;
+            font-style: italic;
+            color: #a2d5f2; /* Light blue for quotes */
+        }
+
+        .container {
+            display: flex; /* Arrange items horizontally */
+            justify-content: center; /* Center align boxes */
+            gap: 20px; /* Spacing between boxes */
+            flex-wrap: wrap; /* Allow wrapping for smaller screens */
+            margin: 20px;
+        }
+
+        .box {
+            width: 300px;
+            padding: 20px;
+            background-color: #0f3460; /* Deep blue background */
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .box h3 {
+            color: #f5b041; /* Gold headers */
+        }
+
+        .input-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        input[type="password"], input[type="text"] {
+            width: 250px;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .toggle-visibility, .clear-text {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .toggle-visibility {
+            right: 40px;
+            color: #f5b041; /* Gold-colored key icon */
+        }
+
+        .clear-text {
+            right: 10px;
+            color: #e74c3c; /* Red-colored clear icon */
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            margin: 10px;
+            cursor: pointer;
+            color: #ffffff;
+        }
+
+        .encrypt-btn {
+            background-color: #16c79a; /* Green button for encryption */
+        }
+
+        .encrypt-btn:hover {
+            background-color: #13a381;
+        }
+
+        .transmit-btn {
+            background-color: #3498db; /* Blue button for transmission */
+        }
+
+        .transmit-btn:hover {
+            background-color: #2a80b9;
+        }
+
+        .decrypt-btn {
+            background-color: #ff6f61; /* Red button for decryption */
+        }
+
+        .decrypt-btn:hover {
+            background-color: #d95c54;
+        }
+
+        .output {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .animation {
+            width: 100px;
+            height: 20px;
+            margin: auto;
+            background-color: #16c79a;
+            border-radius: 5px;
+            animation: moveAnimation 2s infinite alternate ease-in-out;
+            display: none;
+        }
+
+        @keyframes moveAnimation {
+            0% { transform: translateX(0); background-color: #16c79a; }
+            100% { transform: translateX(250px); background-color: #3498db; }
+        }
+    </style>
+</head>
+<body>
+    <h1>Cybersecurity: Protect Your Digital World</h1>
+    <p class="quote">"Cybersecurity is not just a tech problem, it's a human problem."</p>
+
+    <div class="container">
+        <!-- Box 1: Encryption -->
+        <div class="box">
+            <h3>Step 1: Input and Encryption</h3>
+            <p>Enter sensitive data below:</p>
+            <div class="input-container">
+                <input type="password" id="user-input" placeholder="Enter your data" />
+                <button class="toggle-visibility" onclick="toggleVisibility()">🔑</button>
+                <button class="clear-text" onclick="clearText()">❌</button>
+            </div>
+            <button class="encrypt-btn" onclick="encryptData()">Encrypt Data</button>
+            <p id="encrypted-data" class="output"></p>
+        </div>
+
+        <!-- Box 2: Transmission -->
+        <div class="box">
+            <h3>Step 2: Transmission</h3>
+            <p>Watch how data flows securely:</p>
+            <div class="animation" id="animation"></div>
+            <button class="transmit-btn" onclick="transmitData()">Transmit Data</button>
+            <p id="transmitted-data" class="output"></p>
+        </div>
+
+        <!-- Box 3: Decryption -->
+        <div class="box">
+            <h3>Step 3: Decryption</h3>
+            <p>Decrypted data is ready:</p>
+            <button class="decrypt-btn" onclick="decryptData()">Decrypt Data</button>
+            <p id="decrypted-data" class="output"></p>
+        </div>
+    </div>
+
+    <script>
+        let isPasswordVisible = false;
+        let userSensitiveData = "";
+        let encryptedData = "";
+        let transmittedData = "";
+        let decryptedData = "";
+
+        // Toggle the visibility of the input field
+        function toggleVisibility() {
+            const inputField = document.getElementById("user-input");
+            if (isPasswordVisible) {
+                inputField.type = "password"; // Mask the input with *
+            } else {
+                inputField.type = "text"; // Show the actual input
+            }
+            isPasswordVisible = !isPasswordVisible;
+        }
+
+        // Clear the input field
+        function clearText() {
+            document.getElementById("user-input").value = "";
+        }
+
+        // Encrypt data
+        function encryptData() {
+            userSensitiveData = document.getElementById("user-input").value;
+            if (userSensitiveData) {
+                encryptedData = btoa(userSensitiveData); // Base64 encryption
+                document.getElementById("encrypted-data").textContent = "Encrypted: " + encryptedData;
+                resetOutput(["transmitted-data", "decrypted-data"]);
+            } else {
+                alert("Please enter sensitive data!");
+            }
+        }
+
+        // Simulate data transmission with animation
+        function transmitData() {
+            if (encryptedData) {
+                transmittedData = encryptedData; // Simulated transmission
+                const animationElement = document.getElementById("animation");
+                animationElement.style.display = "block"; // Show animation
+                setTimeout(() => {
+                    animationElement.style.display = "none"; // Hide animation after 2 seconds
+                    document.getElementById("transmitted-data").textContent = "Transmitted: " + transmittedData;
+                }, 2000);
+                resetOutput(["decrypted-data"]);
+            } else {
+                alert("Please encrypt the data first!");
+            }
+        }
+
+        // Decrypt data
+        function decryptData() {
+            if (transmittedData) {
+                decryptedData = atob(transmittedData); // Base64 decryption
+                document.getElementById("decrypted-data").textContent = "Decrypted: " + decryptedData;
+            } else {
+                alert("Please transmit the data first!");
+            }
+        }
+
+        // Reset output for subsequent steps
+        function resetOutput(ids) {
+            ids.forEach(id => {
+                document.getElementById(id).textContent = "";
+            });
+        }
+    </script>
+</body>
+</html>
